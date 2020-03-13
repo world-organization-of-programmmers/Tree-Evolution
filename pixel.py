@@ -1,5 +1,10 @@
-class PixelNum:
-    def __init__(self, color=(150, 150, 150), number=None, font_color=(255, 0, 0)):
+class Pixel:
+    def __init__(self, color, position):
         self.color = color
+        self.position = position
+
+class PixelNum(Pixel):
+    def __init__(self, color, position, number):
+        self.color = color
+        self.position = position
         self.number = number
-        self.font_color = font_color
