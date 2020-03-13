@@ -1,26 +1,29 @@
-import numpy as np
+from pixel import PixelNum
+import pygame
 
 
 class Field:
-    def __init__(self, surface_arr, setting):
-        self.surface_arr = surface_arr  # объект pygame.surfarray.pixels3d(screen)
+    def __init__(self, screen, setting):
+        self.screen = screen
         self.size = setting.pixel_size
         self.width = setting.width // setting.pixel_size
         self.height = setting.height // setting.pixel_size
-        self.field = np.zeros((self.width, self.height, 3))  # поле для рисования
+        print(self.width, self.height)
+        self.field = [[PixelNum() for i in range(self.height)] for j in range(self.width)]
 
-    def draw_pixel(self, pixels):  # добавление всех пикселей на поле
-        for pixel in pixels:
-            self.field[pixel.position] = pixel.color
-
-    def fill(self, color):  # заливка одним цветом
+    def blit(self):
         for i in range(self.width):
             for j in range(self.height):
-                self.field[i, j] = color
+                pixel = self.field[i][j]
+                rect = pygame.draw.rect(self.screen, pixel.color,
+                                        (i * self.size, j * self.size, (i + 1) * self.size, (j + 1) * self.size))
+                if pixel.number:
+                    font = pygame.font.Font(None, self.size)
+                    number = font.render(str(pixel.number), 1, pixel.font_color)
+                    rect.centery += self.size // 4
+                    rect.centerx += self.size // 5
+                    self.screen.blit(number, rect)
 
-    def blit(self):          # отображение на экране
-        for i in range(self.width):
-            for j in range(self.height):
-                self.surface_arr[i * self.size + 1:(i + 1) * self.size + 1,
-                j * self.size + 1:(j + 1) * self.size + 1] = \
-                    self.field[i, j]
+    def draw(self, color, position, number):
+        self.field[position[0]][position[1]].color = color
+        self.field[position[0]][position[1]].number = number
