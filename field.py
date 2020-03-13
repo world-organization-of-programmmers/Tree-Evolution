@@ -4,7 +4,7 @@ import pygame
 
 class Field:
     def __init__(self, screen, setting):
-        self.screen = screen  # объект pygame.surfarray.pixels3d(screen)
+        self.screen = screen
         self.bg_color = setting.bg_color
         self.size = setting.pixel_size
         self.width = setting.width // setting.pixel_size
