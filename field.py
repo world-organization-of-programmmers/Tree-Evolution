@@ -27,3 +27,9 @@ class Field:
     def draw(self, color, position, number):
         self.field[position[0]][position[1]].color = color
         self.field[position[0]][position[1]].number = number
+
+    def fill(self, color):
+        for arr in self.field:
+            for pixel in arr:
+                pixel.color = color
+                pixel.number = None

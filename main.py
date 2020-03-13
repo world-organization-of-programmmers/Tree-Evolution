@@ -16,7 +16,12 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+    field.fill(setting.bg_color)
+    field.draw((0, 0, 0), (2, 9), 'h')
+    field.draw((0, 0, 0), (3, 8), 'e')
+    field.draw((0, 0, 0), (4, 7), 'l')
+    field.draw((0, 0, 0), (5, 6), 'l')
+    field.draw((0, 0, 0), (6, 5), 'o')
 
-    field.draw((0, 0, 0), (2, 9), 15)
     field.blit()
     pygame.display.flip()
