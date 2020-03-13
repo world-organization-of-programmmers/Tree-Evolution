@@ -23,7 +23,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tree.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
@@ -73,10 +73,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="451" y="210" width="1084" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1584115587063" />
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1584111612765">
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1584123774477">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1584111612765" />
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1584123774477" />
     <state x="482" y="187" key="SettingsEditor" timestamp="1584115550722">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
