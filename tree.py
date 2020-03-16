@@ -8,7 +8,7 @@ setting = Setting
 def is_free(position, trees):
     position = tuple(position)
     if 0 > position[0] or position[0] >= setting.width // setting.pixel_size or \
-        0 > position[1] or position[1] >= setting.height // setting.pixel_size:
+            0 > position[1] or position[1] >= setting.height // setting.pixel_size:
         return False
     for tree in trees:
         for pixel in tree.get_pixels():
@@ -30,7 +30,7 @@ class Tree:
              [4, 4, 6, 7],
              [5, 8, 0, 7],
              [0, 5, 7, 3]])
-    
+
     def get_pixels(self):
         return self.outgrowthes + self.woods
 

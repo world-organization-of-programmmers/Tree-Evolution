@@ -17,8 +17,9 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-    
+    field.fill()
     field.draw_pixels(tree.get_pixels())
+
     pygame.display.flip()
     
     tree.grow([tree])
