@@ -3,7 +3,7 @@ from setting import Setting
 setting = Setting
 
 
-class PixelNum:
+class Pixel:
     def __init__(self, color, position, number=None):
         self.color = color
         if 0 > position[0] or position[0] >= setting.width // setting.pixel_size or 0 > position[1] or position[
