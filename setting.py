@@ -1,6 +1,6 @@
 class Setting:
-    width = 1000  # размер экрана
-    height = 500
+    width = 1200  # размер экрана
+    height = 600
 
     bg_color = (0, 0, 0)
-    pixel_size = 25
+    pixel_size = 5
