@@ -4,7 +4,7 @@ import numpy as np
 from setting import Setting
 from field import Field
 from tree import Tree
-from button import Button
+from dashboard import Dashboard
 
 import game_function as gf
 
@@ -33,14 +33,21 @@ g = np.array(
      [30, 30, 30, 9]])
 trees = [Tree(15, 119, 0), Tree(30, 119, 0), Tree(45, 119, 0), Tree(90, 119, 0), Tree(75, 119, 0), Tree(150, 119, 0),
          Tree(105, 119, 0)]
-button = Button(screen, (150, 150, 150), (0, 0, 100, 40), "hello", (0, 255, 255))
+dashboard = Dashboard(screen, setting)
+itteration = 0
 
 while True:
 
-    gf.check_event(button)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+        for button in dashboard.buttons:
+            button.is_pressed(event)
 
     field.fill()
-    button.draw_button()
+    dashboard.draw()
+    dashboard.text_areas[0].text = "itteration: " + str(itteration)
+    dashboard.blit((0, 0))
 
     for tree in trees:
         field.draw_pixels(tree.get_pixels())
@@ -54,5 +61,6 @@ while True:
     trees = new_trees
     if not trees:
         trees = [Tree(15, 119, 0), Tree(30, 119, 0), Tree(45, 119, 0), Tree(90, 119, 0)]
+    itteration += 1
 
     # pygame.time.wait(50)

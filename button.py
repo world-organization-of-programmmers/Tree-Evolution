@@ -4,9 +4,9 @@ from text_area import TextArea
 
 
 class Button(TextArea):
-    def __init__(self, screen, color, rect, text, text_color):
+    def __init__(self, screen, color, rect, text, text_color, font_size):
 
-        super().__init__(screen, color, rect, text, text_color)
+        super().__init__(screen, color, rect, text, text_color, font_size)
         self._unpressed_font_color = text_color
         self._pressed_font_color = tuple(map(lambda a: a // 2, text_color))
         self._pressed = False
