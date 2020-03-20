@@ -5,6 +5,7 @@ import pygame
 class Field:
     def __init__(self, screen, setting):
         self.screen = screen
+        self.setting = setting
         self.bg_color = setting.bg_color
         self.size = setting.pixel_size
         self.width = setting.width // setting.pixel_size
@@ -27,8 +28,14 @@ class Field:
                 rect.centerx += self.size // 5
                 self.screen.blit(number, rect)
 
-    def fill(self, color):  # заливка одним цветом
-        self.screen.fill(self.bg_color)
+    def fill(self):  # заливка одним цветом
+        color_code = 150
+        dif = color_code // self.height
+
+        for i in range(self.height):
+            pygame.draw.rect(self.screen, (color_code, color_code, 150 - color_code),
+                             (0, i * self.size, self.setting.width, self.size))
+            color_code -= dif
 
     def get_size(self):
         return self.width, self.height
