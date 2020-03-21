@@ -1,4 +1,4 @@
-from setting import Setting
+from service.setting import Setting
 
 setting = Setting
 
