@@ -1,6 +1,6 @@
 import pygame
 
-from text_area import TextArea
+from dashboard.text_area import TextArea
 
 
 class Button(TextArea):

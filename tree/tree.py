@@ -1,7 +1,7 @@
 import random
 import numpy as np
-from setting import Setting
-from pixel import Pixel
+from service.setting import Setting
+from tree.pixel import Pixel
 
 setting = Setting
 

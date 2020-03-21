@@ -1,5 +1,5 @@
-from button import Button
-from text_area import TextArea
+from dashboard.button import Button
+from dashboard.text_area import TextArea
 import pygame
 import re
 

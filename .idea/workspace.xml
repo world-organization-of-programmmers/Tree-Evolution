@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d34ccaf-7554-41c2-af5a-3b8b32f72fbe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/button.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/field.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game_function.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pixel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/setting.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/text_area.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tree.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/button.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/dashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/tree/tree.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
