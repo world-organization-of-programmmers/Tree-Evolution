@@ -1,12 +1,12 @@
 import pygame
 import sys
 import numpy as np
-from setting import Setting
-from field import Field
-from tree import Tree
-from dashboard import Dashboard
+from service.setting import Setting
+from field.field import Field
+from tree.tree import Tree
+from dashboard.dashboard import Dashboard
 
-import game_function as gf
+import service.game_function as gf
 
 pygame.font.init()
 setting = Setting
