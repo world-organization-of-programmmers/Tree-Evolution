@@ -55,6 +55,7 @@ while True:
 
     field.blit()
 
+
     print(pygame.time.get_ticks() - time)
 
     pygame.display.flip()

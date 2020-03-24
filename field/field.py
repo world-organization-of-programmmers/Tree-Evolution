@@ -16,13 +16,11 @@ class Field:
             self.field[pixel.position] = pixel.color
 
     def fill(self, color=None):  # заливка одним цветом
-        for i in range(self.width):
-            for j in range(self.height):
-                if not color:
-                    color = self.setting.bg_color
-                self.field[i, j] = color
+
+        self.field.fill(0)
 
     def blit(self):  # отображение на экране
         for i in range(self.width):
             for j in range(self.height):
-                self.surface_arr[i * self.size + 1:(i + 1) * self.size + 1, j * self.size + 1:(j + 1) * self.size + 1] = self.field[i, j]
+                self.surface_arr[i * self.size + 1:(i + 1) * self.size + 1, j * self.size + 1:(j + 1) * self.size + 1] = \
+                    self.field[i, j]
