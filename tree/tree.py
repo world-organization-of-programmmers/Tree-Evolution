@@ -27,16 +27,13 @@ def get_cell_energy(cell, trees):
     return k * level
 
 
-def is_free(position, trees):
+def is_free(position, field):
     position = tuple(position)
-    if 0 > position[0] or position[0] >= setting.width // setting.pixel_size or \
-            0 > position[1] or position[1] >= setting.height // setting.pixel_size:
+    if position[0] >= field.width or position[0] < 0 or position[1] >= field.height or position[1] < 0:
         return False
-    for tree in trees:
-        for pixel in tree.get_pixels():
-            if pixel.position == position:
-                return False
-    return True
+    if (field.field[position] == setting.bg_color).all():
+        return True
+    return False
 
 
 def is_unique(position, array):
@@ -49,10 +46,7 @@ def is_unique(position, array):
 
 class Outgrowth(Pixel):
     def __init__(self, color, position, number=None):
-        if 0 > position[0] or position[0] >= setting.width // setting.pixel_size or 0 > position[1] or position[
-            1] >= setting.height // setting.pixel_size:
-            raise Exception("position out of range")
-
+        super().__init__(color, position, number)
         self.color = color
         self.border_color = (150, 150, 150)
         self.position = position
@@ -104,7 +98,7 @@ class Tree:
     def get_pixels(self):
         return self.outgrowthes + self.woods
 
-    def grow(self, all_trees):
+    def grow(self, all_trees, field):
         # print('\nCells amount:', len(self.get_pixels()))
         # print('Energy:', self.energy)
         # print('Age:', self.age)
@@ -120,7 +114,7 @@ class Tree:
             new_t_x, y_field = set([]), setting.height // setting.pixel_size - 1
             for outgrowth in self.outgrowthes:
                 t_x, t_y = outgrowth.position
-                if is_free((t_x, y_field), all_trees):
+                if is_free((t_x, y_field), field):
                     new_t_x.add(t_x)
             sample_genom = np.copy(self.genom)
             new_trees = []
@@ -138,30 +132,30 @@ class Tree:
             if outgrowth.energy >= 18:
                 new_outgrowthes = self.genom[genom_num]
                 # print(genom_num, new_outgrowthes)
-                if new_outgrowthes[0] < self.chromosoms and is_free((x, y - 1), all_trees) and is_unique((x, y - 1),
-                                                                                                         appended_outgrowthes):
+                if new_outgrowthes[0] < self.chromosoms and is_free((x, y - 1), field) and is_unique((x, y - 1),
+                                                                                                     appended_outgrowthes):
                     appended_outgrowthes.append(Outgrowth(self.outgrowth_color, (x, y - 1), str(new_outgrowthes[0])))
-                if new_outgrowthes[1] < self.chromosoms and is_free((x, y + 1), all_trees) and is_unique((x, y + 1),
-                                                                                                         appended_outgrowthes):
+                if new_outgrowthes[1] < self.chromosoms and is_free((x, y + 1), field) and is_unique((x, y + 1),
+                                                                                                     appended_outgrowthes):
                     appended_outgrowthes.append(Outgrowth(self.outgrowth_color, (x, y + 1), str(new_outgrowthes[1])))
                 if new_outgrowthes[2] < self.chromosoms:
                     x_end = setting.width // setting.pixel_size - 1
                     if x == 0:
-                        if is_free((x_end, y), all_trees) and is_unique((x_end, y), appended_outgrowthes):
+                        if is_free((x_end, y), field) and is_unique((x_end, y), appended_outgrowthes):
                             appended_outgrowthes.append(
                                 Outgrowth(self.outgrowth_color, (x_end, y), str(new_outgrowthes[2])))
                     else:
-                        if is_free((x - 1, y), all_trees) and is_unique((x - 1, y), appended_outgrowthes):
+                        if is_free((x - 1, y), field) and is_unique((x - 1, y), appended_outgrowthes):
                             appended_outgrowthes.append(
                                 Outgrowth(self.outgrowth_color, (x - 1, y), str(new_outgrowthes[2])))
                 if new_outgrowthes[3] < self.chromosoms:
                     x_end = setting.width // setting.pixel_size - 1
                     if x == x_end:
-                        if is_free((0, y), all_trees) and is_unique((0, y), appended_outgrowthes):
+                        if is_free((0, y), field) and is_unique((0, y), appended_outgrowthes):
                             appended_outgrowthes.append(
                                 Outgrowth(self.outgrowth_color, (0, y), str(new_outgrowthes[3])))
                     else:
-                        if is_free((x + 1, y), all_trees) and is_unique((x + 1, y), appended_outgrowthes):
+                        if is_free((x + 1, y), field) and is_unique((x + 1, y), appended_outgrowthes):
                             appended_outgrowthes.append(
                                 Outgrowth(self.outgrowth_color, (x + 1, y), str(new_outgrowthes[3])))
                 outgrowth.color = self.wood_color

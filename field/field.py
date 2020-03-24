@@ -3,39 +3,26 @@ import pygame
 
 
 class Field:
-    def __init__(self, screen, setting):
-        self.screen = screen
+    def __init__(self, surface_arr, setting):
         self.setting = setting
-        self.bg_color = setting.bg_color
+        self.surface_arr = surface_arr  # объект pygame.surfarray.pixels3d(screen)
         self.size = setting.pixel_size
         self.width = setting.width // setting.pixel_size
         self.height = setting.height // setting.pixel_size
+        self.field = np.zeros((self.width, self.height, 3))  # поле для рисования
 
     def draw_pixels(self, pixels):  # добавление всех пикселей на поле
         for pixel in pixels:
-            rect = pygame.draw.rect(self.screen, pixel.color,
-                                    (
-                                        pixel.position[0] * self.size, pixel.position[1] * self.size, self.size,
-                                        self.size), 0)
-            rect = pygame.draw.rect(self.screen, pixel.border_color,
-                                    (
-                                        pixel.position[0] * self.size, pixel.position[1] * self.size, self.size,
-                                        self.size), 1)
-            if pixel.number:
-                font = pygame.font.Font(None, self.size)
-                number = font.render(str(pixel.number), 1, pixel.font_color)
-                rect.centery += self.size // 4
-                rect.centerx += self.size // 5
-                self.screen.blit(number, rect)
+            self.field[pixel.position] = pixel.color
 
-    def fill(self):  # заливка одним цветом
-        color_code = 150
-        dif = color_code // self.height
+    def fill(self, color=None):  # заливка одним цветом
+        for i in range(self.width):
+            for j in range(self.height):
+                if not color:
+                    color = self.setting.bg_color
+                self.field[i, j] = color
 
-        for i in range(self.height):
-            pygame.draw.rect(self.screen, (color_code, color_code, 150 - color_code),
-                             (0, i * self.size, self.setting.width, self.size))
-            color_code -= dif
-
-    def get_size(self):
-        return self.width, self.height
+    def blit(self):  # отображение на экране
+        for i in range(self.width):
+            for j in range(self.height):
+                self.surface_arr[i * self.size + 1:(i + 1) * self.size + 1, j * self.size + 1:(j + 1) * self.size + 1] = self.field[i, j]
