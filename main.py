@@ -15,6 +15,7 @@ setting = Setting
 screen = pygame.display.set_mode((setting.width, setting.height))  # создание экрана
 field = Field(screen, setting)
 dashboard = Dashboard(screen, setting)
+map = np.array([[0 for _ in range(setting.width // setting.pixel_size)] for _ in range(setting.height // setting.pixel_size)])
 
 itteration = 0
 delay = 0
@@ -36,14 +37,14 @@ g = np.array(
      [8, 30, 30, 30],
      [30, 30, 30, 30],
      [30, 30, 30, 9]])
-trees = [Tree(15, 119, 0), Tree(30, 119, 0), Tree(45, 119, 0), Tree(90, 119, 0), Tree(75, 119, 0), Tree(150, 119, 0),
-         Tree(105, 119, 0)]
+trees = [Tree(15, 119, 0, map), Tree(30, 119, 0, map), Tree(45, 119, 0, map), Tree(90, 119, 0, map), Tree(75, 119, 0, map), Tree(150, 119, 0, map),
+         Tree(105, 119, 0, map)]
 
 while True:
     for event in pygame.event.get():
         gf.check_event(event, dashboard)
         delay = gf.change_speed(event, dashboard, delay)
-    trees = gf.tree_event(trees)
+    trees = gf.tree_event(trees, map)
     gf.draw_objects(field, dashboard, trees, itteration)
 
     pygame.display.flip()

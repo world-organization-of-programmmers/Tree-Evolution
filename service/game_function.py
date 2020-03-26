@@ -17,10 +17,10 @@ def change_speed(event, dashboard, delay):
     return delay
 
 
-def tree_event(trees):
+def tree_event(trees, map):
     new_trees = []
     for tree in trees:
-        new_tree = tree.grow(trees + new_trees)
+        new_tree = tree.grow(map)
         new_trees += new_tree
     return new_trees
 
