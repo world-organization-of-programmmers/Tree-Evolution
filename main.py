@@ -13,12 +13,8 @@ setting = Setting
 
 screen = pygame.display.set_mode((setting.width, setting.height))  # создание экрана
 field = Field(screen, setting)
-dashboard = Dashboard(screen, setting)
-
-next_step = False
-
-itteration = 0
-delay = 0
+master_time = np.zeros(5000)
+master_trees = np.zeros(5000)
 
 g = np.array(
     [[13, 30, 14, 12],
@@ -38,60 +34,46 @@ g = np.array(
      [8, 30, 30, 30],
      [30, 30, 30, 30],
      [30, 30, 30, 9]])
-trees = [Tree(15, 119, 0), Tree(30, 119, 0), Tree(45, 119, 0), Tree(90, 119, 0), Tree(75, 119, 0), Tree(150, 119, 0),
-         Tree(105, 119, 0)]
+trees = [Tree(45, 59, np.array([[25, 12, 11, 15],
+                                [28, 16, 6, 23],
+                                [8, 13, 10, 24],
+                                [23, 16, 3, 22],
+                                [9, 22, 1, 10],
+                                [28, 3, 21, 12],
+                                [14, 20, 16, 10],
+                                [1, 7, 24, 9],
+                                [11, 19, 21, 24],
+                                [24, 15, 25, 26],
+                                [21, 2, 16, 24],
+                                [30, 20, 1, 14],
+                                [29, 28, 1, 6],
+                                [25, 19, 20, 2],
+                                [16, 23, 5, 13],
+                                [12, 13, 10, 1], ]
+                               ))]
 
-while True:
+for i in range(5000):
+    time = pygame.time.get_ticks()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-
-        for button in dashboard.buttons:  # отработка нажатий кнопок и выключателей
-            button.button_down(event)
-        for switcher in dashboard.switches:
-            switcher.press(event)
-
-        if event.type == pygame.KEYDOWN:  # следующий шаг в step mode при нажатии пробела или стрелки
-            if event.key == pygame.K_SPACE or event.key == pygame.K_RIGHT:
-                next_step = True
-
-    if dashboard.buttons[0].is_pressed():  # изменение задержки
-        if delay > 0:
-            delay -= 10
-    if dashboard.buttons[1].is_pressed():
-        delay += 10
-
-    if dashboard.buttons[3].is_pressed():  # новая симуляция
-        trees = [Tree(15, 119, 0), Tree(30, 119, 0), Tree(45, 119, 0), Tree(90, 119, 0), Tree(75, 119, 0),
-                 Tree(150, 119, 0),
-                 Tree(105, 119, 0)]
-        itteration = 0
-
-    if dashboard.buttons[2].is_pressed():
-        file = input("enter file_name : ")  # соханение генома
-
-        with open(file + '.txt', 'w') as f:
-            for tree in trees:
-                f.write(str(tree.genom) + '\n\n\n')
-
-    if not dashboard.switches[0].is_pressed() or (dashboard.switches[0].is_pressed() and next_step):  # рост деревьев
-        new_trees = []
-        for tree in trees:
-            new_tree = tree.grow(trees + new_trees)
-            new_trees += new_tree
-        trees = new_trees
-
-        itteration += 1
-        next_step = False
+    new_trees = []
+    for tree in trees:
+        new_tree = tree.grow(trees + new_trees)
+        new_trees += new_tree
+    trees = new_trees
 
     field.fill()  # заливка поля и отрисовка объектов
-    dashboard.draw()
-    dashboard.text_areas[0].text = "itteration: " + str(itteration)
-    dashboard.blit((0, 0))
+
     for tree in trees:
         field.draw_pixels(tree.get_pixels())
 
-    for button in dashboard.buttons:  # отработка разжатия кнопок
-        button.button_up()
     pygame.display.flip()
-    pygame.time.wait(delay)  # задержка
+    master_time[i] = pygame.time.get_ticks() - time
+    trees_count = 0
+    for tree in trees:
+        trees_count += len(tree.get_pixels())
+    master_trees[i] = trees_count
+
+np.save('master_time', master_time)
+np.save('master_trees', master_trees)

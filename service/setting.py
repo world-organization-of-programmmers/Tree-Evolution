@@ -1,5 +1,5 @@
 class Setting:
-    width = 1400  # размер экрана
-    height = 600
+    width = 1800  # размер экрана
+    height = 1000
     dashboard_height = 50
-    pixel_size = 5
+    pixel_size = 20

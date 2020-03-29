@@ -49,10 +49,6 @@ def is_unique(position, array):
 
 class Outgrowth(Pixel):
     def __init__(self, color, position, number=None):
-        if 0 > position[0] or position[0] >= setting.width // setting.pixel_size or 0 > position[1] or position[
-            1] >= setting.height // setting.pixel_size:
-            raise Exception("position out of range")
-
         self.color = color
         self.border_color = (150, 150, 150)
         self.position = position
@@ -78,11 +74,7 @@ class Tree:
         else:
             self.genom = np.array(
                 [[random.randint(0, (self.chromosoms - 1) * 2) for _ in range(4)] for _ in range(self.chromosoms)])
-        chance = random.randint(1, 100)
-        if chance <= 25:
-            # print('mutation')
-            i, j = random.randint(0, self.chromosoms - 1), random.randint(0, 3)
-            self.genom[i, j] = random.randint(0, (self.chromosoms - 1) * 2)
+
         # self.genom = np.array(
         #    [[13, 30, 14, 12],
         #     [30, 30, 30, 30],
