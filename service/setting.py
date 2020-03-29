@@ -1,6 +1,5 @@
 class Setting:
-    width = 1200  # размер экрана
+    width = 1400  # размер экрана
     height = 600
-
-    bg_color = (0, 0, 0)
+    dashboard_height = 50
     pixel_size = 5

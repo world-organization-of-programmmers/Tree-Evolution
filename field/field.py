@@ -6,7 +6,6 @@ class Field:
     def __init__(self, screen, setting):
         self.screen = screen
         self.setting = setting
-        self.bg_color = setting.bg_color
         self.size = setting.pixel_size
         self.width = setting.width // setting.pixel_size
         self.height = setting.height // setting.pixel_size
