@@ -29,7 +29,7 @@ class Field:
 
     def fill(self):  # заливка одним цветом
         color_code = 150
-        dif = color_code // self.height
+        dif = color_code / self.height
 
         for i in range(self.height):
             pygame.draw.rect(self.screen, (color_code, color_code, 150 - color_code),
