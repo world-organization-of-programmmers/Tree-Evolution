@@ -14,6 +14,7 @@ setting = Setting
 screen = pygame.display.set_mode((setting.width, setting.height))  # создание экрана
 field = Field(screen, setting)
 dashboard = Dashboard(screen, setting)
+map = np.array([[0 for _ in range(setting.width // setting.pixel_size)] for _ in range(setting.height // setting.pixel_size)])
 
 next_step = False
 
@@ -38,8 +39,8 @@ g = np.array(
      [8, 30, 30, 30],
      [30, 30, 30, 30],
      [30, 30, 30, 9]])
-trees = [Tree(15, 119, 0), Tree(30, 119, 0), Tree(45, 119, 0), Tree(90, 119, 0), Tree(75, 119, 0), Tree(150, 119, 0),
-         Tree(105, 119, 0)]
+trees = [Tree(15, 119, 0, map), Tree(30, 119, 0, map), Tree(45, 119, 0, map), Tree(90, 119, 0, map), Tree(75, 119, 0, map), Tree(150, 119, 0, map),
+         Tree(105, 119, 0, map)]
 
 while True:
     for event in pygame.event.get():
@@ -62,9 +63,8 @@ while True:
         delay += 10
 
     if dashboard.buttons[3].is_pressed():  # новая симуляция
-        trees = [Tree(15, 119, 0), Tree(30, 119, 0), Tree(45, 119, 0), Tree(90, 119, 0), Tree(75, 119, 0),
-                 Tree(150, 119, 0),
-                 Tree(105, 119, 0)]
+        trees = [Tree(15, 119, 0, map), Tree(30, 119, 0, map), Tree(45, 119, 0, map), Tree(90, 119, 0, map), Tree(75, 119, 0, map), Tree(150, 119, 0, map),
+                 Tree(105, 119, 0, map)]
         itteration = 0
 
     if dashboard.buttons[2].is_pressed():
@@ -77,7 +77,7 @@ while True:
     if not dashboard.switches[0].is_pressed() or (dashboard.switches[0].is_pressed() and next_step):  # рост деревьев
         new_trees = []
         for tree in trees:
-            new_tree = tree.grow(trees + new_trees)
+            new_tree = tree.grow(map)
             new_trees += new_tree
         trees = new_trees
 
