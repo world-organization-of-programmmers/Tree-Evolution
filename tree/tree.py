@@ -137,39 +137,36 @@ class Tree:
                 if new_outgrowthes[0] < self.chromosoms and is_free((x, y - 1), map) and is_unique((x, y - 1),
                                                                                                          appended_outgrowthes):
                     appended_outgrowthes.append(Outgrowth(self.outgrowth_color, (x, y - 1), str(new_outgrowthes[0])))
-                    map[y - 1, x] = 1
                 if new_outgrowthes[1] < self.chromosoms and is_free((x, y + 1), map) and is_unique((x, y + 1),
                                                                                                          appended_outgrowthes):
                     appended_outgrowthes.append(Outgrowth(self.outgrowth_color, (x, y + 1), str(new_outgrowthes[1])))
-                    map[y + 1, x] = 1
                 if new_outgrowthes[2] < self.chromosoms:
                     x_end = setting.width // setting.pixel_size - 1
                     if x == 0:
                         if is_free((x_end, y), map) and is_unique((x_end, y), appended_outgrowthes):
                             appended_outgrowthes.append(
                                 Outgrowth(self.outgrowth_color, (x_end, y), str(new_outgrowthes[2])))
-                            map[y, x_end] = 1
                     else:
                         if is_free((x - 1, y), map) and is_unique((x - 1, y), appended_outgrowthes):
                             appended_outgrowthes.append(
                                 Outgrowth(self.outgrowth_color, (x - 1, y), str(new_outgrowthes[2])))
-                            map[y, x - 1] = 1
                 if new_outgrowthes[3] < self.chromosoms:
                     x_end = setting.width // setting.pixel_size - 1
                     if x == x_end:
                         if is_free((0, y), map) and is_unique((0, y), appended_outgrowthes):
                             appended_outgrowthes.append(
                                 Outgrowth(self.outgrowth_color, (0, y), str(new_outgrowthes[3])))
-                            map[y, 0] = 1
                     else:
                         if is_free((x + 1, y), map) and is_unique((x + 1, y), appended_outgrowthes):
                             appended_outgrowthes.append(
                                 Outgrowth(self.outgrowth_color, (x + 1, y), str(new_outgrowthes[3])))
-                            map[y, x + 1] = 1
                 outgrowth.color = self.wood_color
                 outgrowth.number = None
                 self.woods.append(outgrowth)
             else:
                 appended_outgrowthes.append(outgrowth)
         self.outgrowthes = appended_outgrowthes
+        for pixel in appended_outgrowthes:
+            x, y = pixel.position
+            map[y, x] = 1
         return [self]
