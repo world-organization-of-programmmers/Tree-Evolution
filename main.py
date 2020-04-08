@@ -14,7 +14,7 @@ arguments = {'non_gui': False,
              'step_mode': False,
              'trees_count': 10,
              'itter_save': None,
-             'folder': None}
+             'folder': 'TreesGenoms'}
 
 arguments, setting = gf.create_arguments(arguments, sys.argv[1:], setting)
 
@@ -86,11 +86,11 @@ if not arguments['non_gui']:
             next_step = False
 
         field.fill()  # заливка поля и отрисовка объектов
+        for tree in trees:
+            field.draw_pixels(tree.get_pixels())
         dashboard.draw()
         dashboard.text_areas[0].text = "itteration: " + str(itteration)
         dashboard.blit((0, 0))
-        for tree in trees:
-            field.draw_pixels(tree.get_pixels())
 
         for button in dashboard.buttons:  # отработка разжатия кнопок
             button.button_up()
