@@ -5,20 +5,19 @@ import getopt
 
 
 def save_genom(arguments, trees, itteration):
-    if arguments['itter_save'] and arguments['folder'] and itteration % arguments['itter_save'] == 0:
+    if arguments['itter_save'] and itteration % arguments['itter_save'] == 0:
         name = arguments['folder'] + '/TreesGenom_' + str(itteration) + '_iteration'
         os.mkdir(name)
         for i in range(len(trees)):
             np.save(name + '/tree_' + str(i), trees[i].genom)
 
 
-def create_arguments(arguments, args,setting):
+def create_arguments(arguments, args, setting):
     opts, argv = getopt.getopt(args, 'o:i:t:', ['cli', 'step_mode', 'width=', 'height=', 'pixel_size='])
 
     for opt, arg in opts:
         if opt == '-o':
             arguments['folder'] = arg
-            os.mkdir(arg)
         if opt == '-i':
             arguments['itter_save'] = int(arg)
         if opt == '-t':
@@ -33,5 +32,7 @@ def create_arguments(arguments, args,setting):
             setting.height = int(arg)
         if opt == '--pixel_size':
             setting.pixel_size = int(arg)
+    if arguments['itter_save']:
+        os.mkdir(arguments['folder'])
 
     return arguments, setting
