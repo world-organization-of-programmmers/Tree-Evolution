@@ -40,7 +40,7 @@ class Switch(TextArea):
         super().__init__(screen, color, rect, text, text_color, font_size)
         self._unpressed_font_color = text_color
         self._pressed_font_color = tuple(map(lambda a: a // 2, text_color))
-        self._pressed = False
+        self.pressed = False
         self._unpressed_color = color
         self._pressed_color = tuple(map(lambda a: a // 2, color))
 
@@ -49,14 +49,14 @@ class Switch(TextArea):
             mouse_pos = pygame.mouse.get_pos()
             if event.button == 1 and self.rect.left < mouse_pos[
                 0] < self.rect.right and self.rect.top < mouse_pos[1] < self.rect.bottom:
-                if not self._pressed:
+                if not self.pressed:
                     self.color = self._pressed_color
                     self.text_color = self._pressed_font_color
-                    self._pressed = True
-                elif self._pressed:
+                    self.pressed = True
+                elif self.pressed:
                     self.color = self._unpressed_color
                     self.text_color = self._unpressed_font_color
-                    self._pressed = False
+                    self.pressed = False
 
     def is_pressed(self):
-        return self._pressed
+        return self.pressed
