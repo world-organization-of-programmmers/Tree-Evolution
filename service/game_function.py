@@ -18,7 +18,7 @@ def create_arguments(arguments, args,setting):
     for opt, arg in opts:
         if opt == '-o':
             arguments['folder'] = arg
-            os.mkdir(arg)
+
         if opt == '-i':
             arguments['itter_save'] = int(arg)
         if opt == '-t':
@@ -33,5 +33,7 @@ def create_arguments(arguments, args,setting):
             setting.height = int(arg)
         if opt == '--pixel_size':
             setting.pixel_size = int(arg)
+    if arguments['itter_save']:
+        os.mkdir(arguments['folder'])
 
     return arguments, setting

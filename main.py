@@ -14,7 +14,7 @@ arguments = {'non_gui': False,
              'step_mode': False,
              'trees_count': 10,
              'itter_save': None,
-             'folder': None}
+             'folder': 'TreesGenom'}
 
 arguments, setting = gf.create_arguments(arguments, sys.argv[1:], setting)
 
