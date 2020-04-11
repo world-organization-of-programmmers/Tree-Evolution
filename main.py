@@ -14,20 +14,18 @@ arguments = {'non_gui': False,
              'step_mode': False,
              'trees_count': 10,
              'itter_save': None,
-             'folder': 'TreesGenom'}
+             'folder': 'TreesGenom',
+             'genoms_folder': None}
 
 arguments, setting = gf.create_arguments(arguments, sys.argv[1:], setting)
 
-print(arguments)
+
 
 itteration = 1
 map = np.array(
     [[0 for _ in range(setting.width // setting.pixel_size)] for _ in range(setting.height // setting.pixel_size)])
 
-trees = [Tree(step, setting.height // setting.pixel_size - 1, 0, map) for step in
-         range(0, setting.width // setting.pixel_size,
-               int(setting.width / setting.pixel_size // arguments['trees_count']))]
-
+trees = gf.create_trees(arguments, setting, map)
 if not arguments['non_gui']:
     delay = 0
     pygame.font.init()
@@ -60,9 +58,13 @@ if not arguments['non_gui']:
             delay += 10
 
         if dashboard.buttons[3].is_pressed():  # новая симуляция
-            trees = [Tree(step, setting.height // setting.pixel_size - 1, 0, map) for step in
-                     range(0, setting.width // setting.pixel_size,
-                           int(setting.width / setting.pixel_size // arguments['trees_count']))]
+            trees = gf.create_trees(arguments, setting, map)
+            if arguments['itter_save']:
+                for folder in os.listdir(arguments['folder']):
+                    for file in os.listdir(arguments['folder'] + '/' + folder):
+                        os.remove(arguments['folder'] + '/' + folder + '/' + file)
+                    os.rmdir(arguments['folder'] + '/' + folder)
+
             itteration = 0
 
         if dashboard.buttons[2].is_pressed():

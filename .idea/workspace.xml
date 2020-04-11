@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d34ccaf-7554-41c2-af5a-3b8b32f72fbe" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/game_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/game_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/tree/tree.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +24,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/service/game_function.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dashboard/dashboard.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
@@ -64,11 +66,13 @@
       <workItem from="1584877223939" duration="599000" />
       <workItem from="1584958734994" duration="2929000" />
       <workItem from="1585491745966" duration="6664000" />
+      <workItem from="1586522530679" duration="3756000" />
+      <workItem from="1586602088408" duration="4075000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="451" y="210" width="1084" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584115587063">
