@@ -42,4 +42,6 @@ To start simulation, run this command:
 [![](https://img.youtube.com/vi/9t3mAgyzeZM/0.jpg)](https://www.youtube.com/watch?v=9t3mAgyzeZM)
 
 ## License
-MIT License
+<a href="http://opensource.org/licenses/MIT">MIT</a>
+
+All rights belong to their respective owners
