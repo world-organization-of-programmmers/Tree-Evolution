@@ -1,4 +1,3 @@
-# Tree Evolution 
 ![](images/logo.png)
 
 ## Get started
