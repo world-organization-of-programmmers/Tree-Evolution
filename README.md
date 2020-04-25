@@ -4,11 +4,13 @@
 
 Have you ever wondered why trees look like this?
 
-We were inspired by the <a href="https://www.youtube.com/watch?v=WTh-gNZxTM8" target="_blank">foo52ru channel</a> and decided to simulate the evolution of trees. To do this, we use genetic algorithms and the PyGame library.
+We were inspired by the <a href="https://www.youtube.com/watch?v=WTh-gNZxTM8" target="_blank">foo52ru video</a> and decided to simulate the evolution of trees. To do this, we use genetic algorithms and the PyGame library.
 
-To start simulation, run this command:
+To start, run this commands:
 
-``` python3 main.py ```
+1. ``` git clone https://github.com/world-organization-of-programmmers/Tree-Evolution ```
+2. ``` cd Tree-Evolution ```
+3. ``` python3 ./main.py ```
 
 ### Command line arguments
 ```
