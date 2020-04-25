@@ -1,97 +1,110 @@
 import pygame
-import sys
+import sys, getopt
 import numpy as np
 from service.setting import Setting
 from field.field import Field
 from tree.tree import Tree
 from dashboard.dashboard import Dashboard
-
-pygame.font.init()
-pygame.init()
+import service.game_function as gf
+import os
 
 setting = Setting
 
-screen = pygame.display.set_mode((setting.width, setting.height))  # создание экрана
-field = Field(screen, setting)
-dashboard = Dashboard(screen, setting)
-map = np.array([[0 for _ in range(setting.width // setting.pixel_size)] for _ in range(setting.height // setting.pixel_size)])
+arguments = {'non_gui': False,
+             'step_mode': False,
+             'trees_count': 10,
+             'itter_save': None,
+             'folder': 'TreesGenom',
+             'genoms_folder': None}
 
-next_step = False
+arguments, setting = gf.create_arguments(arguments, sys.argv[1:], setting)
 
-itteration = 0
-delay = 0
 
-g = np.array(
-    [[13, 30, 14, 12],
-     [30, 30, 30, 30],
-     [30, 9, 30, 2],
-     [30, 30, 30, 30],
-     [30, 30, 30, 30],
-     [30, 30, 30, 30],
 
-     [30, 30, 30, 30],
-     [30, 11, 30, 30],
-     [15, 30, 30, 30],
-     [30, 30, 30, 0],
-     [30, 30, 30, 30],
-     [6, 30, 8, 2],
-     [30, 7, 30, 30],
-     [8, 30, 30, 30],
-     [30, 30, 30, 30],
-     [30, 30, 30, 9]])
-trees = [Tree(15, 119, 0, map), Tree(30, 119, 0, map), Tree(45, 119, 0, map), Tree(90, 119, 0, map), Tree(75, 119, 0, map), Tree(150, 119, 0, map),
-         Tree(105, 119, 0, map)]
+itteration = 1
+map = np.array(
+    [[0 for _ in range(setting.width // setting.pixel_size)] for _ in range(setting.height // setting.pixel_size)])
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
+trees = gf.create_trees(arguments, setting, map)
+if not arguments['non_gui']:
+    delay = 0
+    pygame.font.init()
+    pygame.init()
 
-        for button in dashboard.buttons:  # отработка нажатий кнопок и выключателей
-            button.button_down(event)
-        for switcher in dashboard.switches:
-            switcher.press(event)
+    screen = pygame.display.set_mode((setting.width, setting.height))  # создание экрана
+    field = Field(screen, setting)
+    dashboard = Dashboard(screen, setting)
+    dashboard.switches[0].pressed = arguments['step_mode']
+    next_step = False
 
-        if event.type == pygame.KEYDOWN:  # следующий шаг в step mode при нажатии пробела или стрелки
-            if event.key == pygame.K_SPACE or event.key == pygame.K_RIGHT:
-                next_step = True
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
 
-    if dashboard.buttons[0].is_pressed():  # изменение задержки
-        if delay > 0:
-            delay -= 10
-    if dashboard.buttons[1].is_pressed():
-        delay += 10
+            for button in dashboard.buttons:  # отработка нажатий кнопок и выключателей
+                button.button_down(event)
+            for switcher in dashboard.switches:
+                switcher.press(event)
 
-    if dashboard.buttons[3].is_pressed():  # новая симуляция
-        trees = [Tree(15, 119, 0, map), Tree(30, 119, 0, map), Tree(45, 119, 0, map), Tree(90, 119, 0, map), Tree(75, 119, 0, map), Tree(150, 119, 0, map),
-                 Tree(105, 119, 0, map)]
-        itteration = 0
+            if event.type == pygame.KEYDOWN:  # следующий шаг в step mode при нажатии пробела или стрелки
+                if event.key == pygame.K_SPACE or event.key == pygame.K_RIGHT:
+                    next_step = True
 
-    if dashboard.buttons[2].is_pressed():
-        file = input("enter file_name : ")  # соханение генома
+        if dashboard.buttons[0].is_pressed():  # изменение задержки
+            if delay > 0:
+                delay -= 10
+        if dashboard.buttons[1].is_pressed():
+            delay += 10
 
-        with open(file + '.txt', 'w') as f:
+        if dashboard.buttons[3].is_pressed():  # новая симуляция
+            trees = gf.create_trees(arguments, setting, map)
+            if arguments['itter_save']:
+                for folder in os.listdir(arguments['folder']):
+                    for file in os.listdir(arguments['folder'] + '/' + folder):
+                        os.remove(arguments['folder'] + '/' + folder + '/' + file)
+                    os.rmdir(arguments['folder'] + '/' + folder)
+
+            itteration = 0
+
+        if dashboard.buttons[2].is_pressed():
+            file = input("enter file_name : ")  # соханение генома
+
+            with open(file + '.txt', 'w') as f:
+                for tree in trees:
+                    f.write(str(tree.genom) + '\n\n\n')
+
+        gf.save_genom(arguments, trees, itteration)
+
+        if not dashboard.switches[0].is_pressed() or (
+                dashboard.switches[0].is_pressed() and next_step):  # рост деревьев
+            new_trees = []
             for tree in trees:
-                f.write(str(tree.genom) + '\n\n\n')
+                new_tree = tree.grow(map)
+                new_trees += new_tree
+            trees = new_trees
 
-    if not dashboard.switches[0].is_pressed() or (dashboard.switches[0].is_pressed() and next_step):  # рост деревьев
+            itteration += 1
+            next_step = False
+
+        field.fill()  # заливка поля и отрисовка объектов
+        dashboard.draw()
+        dashboard.text_areas[0].text = "itteration: " + str(itteration)
+        dashboard.blit((0, 0))
+        for tree in trees:
+            field.draw_pixels(tree.get_pixels())
+
+        for button in dashboard.buttons:  # отработка разжатия кнопок
+            button.button_up()
+        pygame.display.flip()
+        pygame.time.wait(delay)  # задержка
+else:
+    while True:
         new_trees = []
         for tree in trees:
             new_tree = tree.grow(map)
             new_trees += new_tree
         trees = new_trees
-
         itteration += 1
-        next_step = False
 
-    field.fill()  # заливка поля и отрисовка объектов
-    dashboard.draw()
-    dashboard.text_areas[0].text = "itteration: " + str(itteration)
-    dashboard.blit((0, 0))
-    for tree in trees:
-        field.draw_pixels(tree.get_pixels())
-
-    for button in dashboard.buttons:  # отработка разжатия кнопок
-        button.button_up()
-    pygame.display.flip()
-    pygame.time.wait(delay)  # задержка
+        gf.save_genom(arguments, trees, itteration)
