@@ -51,9 +51,9 @@ So, we:
 2) widened the world;
 3) optimized tree growth and launched our world on powerful graphics processors to see how trees will grow and develop.
 
-There are 34 hours of uninterrupted calculation!
+34 hours of uninterrupted calculation!
 
-That's the world we got at the end:
+That's the world we got after 2,000,000 iterations:
 ![](images/result_after_2,000,000_iterations.jpg)
 
 Result TreeGenom folder with trees' genoms at each 10,000 iterations you can find <a href="https://drive.google.com/file/d/16ARCMLx0wL62AeH6alIBoESAuu4N308i/view?usp=sharing" target="_blank">here.</a>
