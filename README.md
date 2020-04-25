@@ -43,6 +43,22 @@ To start, run this commands:
 ## Video about the project
 [![](https://img.youtube.com/vi/9t3mAgyzeZM/0.jpg)](https://www.youtube.com/watch?v=9t3mAgyzeZM)
 
+Presentation: Soon
+
+## Our results
+So, we:
+1) programmed the trees and the evolutionary process;
+2) widened the world;
+3) optimized tree growth and launched our world on powerful graphics processors to see how trees will grow and develop.
+
+There are 34 hours of uninterrupted calculation!
+
+That's the world we got at the end:
+![](images/result_after_2,000,000_iterations.jpg)
+
+Result TreeGenom folder with trees' genoms at each 10,000 iterations you can find <a href="https://drive.google.com/file/d/16ARCMLx0wL62AeH6alIBoESAuu4N308i/view?usp=sharing" target="_blank">here.</a>
+
+
 ## License
 <a href="LICENSE">MIT</a>
 
