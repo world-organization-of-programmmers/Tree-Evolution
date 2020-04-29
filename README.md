@@ -43,7 +43,7 @@ To start, run this commands:
 ## Video about the project
 [![](https://img.youtube.com/vi/9t3mAgyzeZM/0.jpg)](https://www.youtube.com/watch?v=9t3mAgyzeZM)
 
-Presentation: Soon
+<a href="https://docs.google.com/presentation/d/1f2m2CzPWqukrGgyOlo8mzjLpiyaQxQqGLoY1WD0cX3c/edit?usp=sharing" target="_blank">Presentation</a>
 
 ## Our results
 So, we:
