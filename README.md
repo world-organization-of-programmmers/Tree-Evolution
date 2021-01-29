@@ -1,5 +1,10 @@
 ![](images/logo.png)
 
+![](https://img.shields.io/badge/-status:wip-5319e7.svg)
+![](https://img.shields.io/github/license/world-organization-of-programmmers/Tree-Evolution)
+![](https://img.shields.io/github/languages/code-size/world-organization-of-programmmers/Tree-Evolution)
+![](https://img.shields.io/github/last-commit/world-organization-of-programmmers/Tree-Evolution)
+
 ## Get started
 
 Have you ever wondered why trees look like this?
